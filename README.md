@@ -1,9 +1,14 @@
+## Static site links
+
+- CloudFront website URL - https://d1j4anurvkffkv.cloudfront.net/
+- S3 website URL - https://dheeraj-reddy-anumula-node-in-aws.s3.amazonaws.com/index.html
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
 In the project directory, you can run:  
-You can use NPM instead of YARN (Up to you)  
+You can use NPM instead of YARN (Up to you)
 
 ### `yarn start` OR `npm run start`
 
