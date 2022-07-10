@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import { Product, ProductSchema } from "models/Product";
-import { Formik, Field, FormikProps, FormikValues } from "formik";
-import { TextField } from "formik-material-ui";
-import axios from "axios";
-import { useHistory, useParams } from "react-router-dom";
-import PaperLayout from "components/PaperLayout/PaperLayout";
-import Typography from "@material-ui/core/Typography";
-import API_PATHS from "constants/apiPaths";
+import React, { useEffect, useState } from 'react';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
+import { Product, ProductSchema } from 'models/Product';
+import { Formik, Field, FormikProps, FormikValues } from 'formik';
+import { TextField } from 'formik-material-ui';
+import axios from 'axios';
+import { useHistory, useParams } from 'react-router-dom';
+import PaperLayout from 'components/PaperLayout/PaperLayout';
+import Typography from '@material-ui/core/Typography';
+import API_PATHS from 'constants/apiPaths';
 
 const Form = (props: FormikProps<FormikValues>) => {
   const {
@@ -35,25 +35,25 @@ const Form = (props: FormikProps<FormikValues>) => {
   } = props;
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
+    <form onSubmit={handleSubmit} autoComplete='off'>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Field
             component={TextField}
-            name="title"
-            label="Title"
+            name='title'
+            label='Title'
             fullWidth
-            autoComplete="off"
+            autoComplete='off'
             required
           />
         </Grid>
         <Grid item xs={12}>
           <Field
             component={TextField}
-            name="description"
-            label="Description"
+            name='description'
+            label='Description'
             fullWidth
-            autoComplete="off"
+            autoComplete='off'
             multiline
             required
           />
@@ -61,29 +61,29 @@ const Form = (props: FormikProps<FormikValues>) => {
         <Grid item xs={12} sm={4}>
           <Field
             component={TextField}
-            name="price"
-            label="Price ($)"
+            name='price'
+            label='Price ($)'
             fullWidth
-            autoComplete="off"
+            autoComplete='off'
             required
           />
         </Grid>
         <Grid item xs={12} sm={4}>
           <Field
             component={TextField}
-            name="count"
-            label="Count"
+            name='count'
+            label='Count'
             fullWidth
-            autoComplete="off"
+            autoComplete='off'
             required
           />
         </Grid>
-        <Grid item container xs={12} justify="space-between">
-          <Button color="primary">Cancel</Button>
+        <Grid item container xs={12} justify='space-between'>
+          <Button color='primary'>Cancel</Button>
           <Button
-            type="submit"
-            variant="contained"
-            color="primary"
+            type='submit'
+            variant='contained'
+            color='primary'
             disabled={!dirty || isSubmitting || !isValid}
           >
             Save Product
@@ -109,7 +109,7 @@ export default function PageProductForm() {
       : formattedValues;
     axios
       .put(`${API_PATHS.bff}/product`, productToSave)
-      .then(() => history.push("/admin/products"));
+      .then(() => history.push('/admin/products'));
   };
 
   useEffect(() => {
@@ -127,8 +127,8 @@ export default function PageProductForm() {
 
   return (
     <PaperLayout>
-      <Typography component="h1" variant="h4" align="center">
-        {id ? "Edit product" : "Create new product"}
+      <Typography component='h1' variant='h4' align='center'>
+        {id ? 'Edit product' : 'Create new product'}
       </Typography>
       <Formik
         initialValues={product || emptyValues}

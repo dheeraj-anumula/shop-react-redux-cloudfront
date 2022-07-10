@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from "react";
-import { OrderItem } from "models/Order";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import PaperLayout from "components/PaperLayout/PaperLayout";
-import Typography from "@material-ui/core/Typography";
-import API_PATHS from "constants/apiPaths";
-import { CartItem } from "models/CartItem";
-import { Product } from "models/Product";
-import ReviewOrder from "components/pages/PageCart/components/ReviewOrder";
-import { ORDER_STATUS, ORDER_STATUS_FLOW } from "constants/order";
-import Button from "@material-ui/core/Button";
-import MenuItem from "@material-ui/core/MenuItem";
-import { Field, Formik, FormikProps, FormikValues } from "formik";
-import Grid from "@material-ui/core/Grid";
-import { TextField } from "formik-material-ui";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableBody from "@material-ui/core/TableBody";
-import TableContainer from "@material-ui/core/TableContainer";
+import React, { useEffect, useState } from 'react';
+import { OrderItem } from 'models/Order';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import PaperLayout from 'components/PaperLayout/PaperLayout';
+import Typography from '@material-ui/core/Typography';
+import API_PATHS from 'constants/apiPaths';
+import { CartItem } from 'models/CartItem';
+import { Product } from 'models/Product';
+import ReviewOrder from 'components/pages/PageCart/components/ReviewOrder';
+import { ORDER_STATUS, ORDER_STATUS_FLOW } from 'constants/order';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Field, Formik, FormikProps, FormikValues } from 'formik';
+import Grid from '@material-ui/core/Grid';
+import { TextField } from 'formik-material-ui';
+import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableCell from '@material-ui/core/TableCell';
+import TableBody from '@material-ui/core/TableBody';
+import TableContainer from '@material-ui/core/TableContainer';
 
 const Form = (props: FormikProps<FormikValues>) => {
   const {
@@ -44,10 +44,10 @@ const Form = (props: FormikProps<FormikValues>) => {
     // onGetCitizen,
     // shouldConfirmLeave,
   } = props;
-  let helperText = "";
+  let helperText = '';
   if (values.status === ORDER_STATUS.approved) {
     helperText =
-      "Setting status to APPROVED will decrease products count from stock!!!";
+      'Setting status to APPROVED will decrease products count from stock!!!';
   }
   // TODO add check if status was changed from approved to cancelled
   //  to increase product count back again
@@ -56,13 +56,13 @@ const Form = (props: FormikProps<FormikValues>) => {
   // }
 
   return (
-    <form onSubmit={handleSubmit} autoComplete="off">
+    <form onSubmit={handleSubmit} autoComplete='off'>
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <Field
             component={TextField}
-            name="status"
-            label="Status"
+            name='status'
+            label='Status'
             select
             fullWidth
             helperText={helperText}
@@ -77,18 +77,18 @@ const Form = (props: FormikProps<FormikValues>) => {
         <Grid item xs={12}>
           <Field
             component={TextField}
-            name="comment"
-            label="Comment"
+            name='comment'
+            label='Comment'
             fullWidth
-            autoComplete="off"
+            autoComplete='off'
             multiline
           />
         </Grid>
-        <Grid item container xs={12} justify="space-between">
+        <Grid item container xs={12} justify='space-between'>
           <Button
-            type="submit"
-            variant="contained"
-            color="primary"
+            type='submit'
+            variant='contained'
+            color='primary'
             disabled={!dirty || isSubmitting || !isValid}
           >
             Change status
@@ -139,42 +139,42 @@ export default function PageOrder() {
 
   return (
     <PaperLayout>
-      <Typography component="h1" variant="h4" align="center">
+      <Typography component='h1' variant='h4' align='center'>
         Manage order
       </Typography>
       <ReviewOrder address={order.address} items={cartItems} />
-      <Typography variant="h6">Status:</Typography>
-      <Typography variant="h6" color="primary">
+      <Typography variant='h6'>Status:</Typography>
+      <Typography variant='h6' color='primary'>
         {lastStatusItem?.status.toUpperCase()}
       </Typography>
-      <Typography variant="h6">Change status:</Typography>
+      <Typography variant='h6'>Change status:</Typography>
       <Formik
-        initialValues={{ status: lastStatusItem.status, comment: "" }}
+        initialValues={{ status: lastStatusItem.status, comment: '' }}
         enableReinitialize
         onSubmit={onChangeStatus}
       >
         {(props: FormikProps<FormikValues>) => <Form {...props} />}
       </Formik>
-      <Typography variant="h6">Status history:</Typography>
+      <Typography variant='h6'>Status history:</Typography>
       <TableContainer>
-        <Table aria-label="simple table">
+        <Table aria-label='simple table'>
           <TableHead>
             <TableRow>
               <TableCell>Status</TableCell>
-              <TableCell align="right">Date and Time</TableCell>
-              <TableCell align="right">Comment</TableCell>
+              <TableCell align='right'>Date and Time</TableCell>
+              <TableCell align='right'>Comment</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {statusHistory.map((statusHistoryItem: any) => (
               <TableRow key={order.id}>
-                <TableCell component="th" scope="row">
+                <TableCell component='th' scope='row'>
                   {statusHistoryItem.status.toUpperCase()}
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align='right'>
                   {new Date(statusHistoryItem.timestamp).toString()}
                 </TableCell>
-                <TableCell align="right">{statusHistoryItem.comment}</TableCell>
+                <TableCell align='right'>{statusHistoryItem.comment}</TableCell>
               </TableRow>
             ))}
           </TableBody>
