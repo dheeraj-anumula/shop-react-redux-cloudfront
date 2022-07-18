@@ -1,3 +1,10 @@
+## Static site links
+
+- CloudFront website URL - https://d1j4anurvkffkv.cloudfront.net/
+- S3 website URL - https://dheeraj-reddy-anumula-node-in-aws.s3.amazonaws.com/index.html
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 # React-shop-cloudfront
 
 This is frontend starter project for nodejs-aws mentoring program. It uses the following technologies:
