@@ -1,6 +1,6 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Box from "@mui/material/Box";
 
 type CSVFileImportProps = {
@@ -27,21 +27,39 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     console.log("uploadFile to", url);
 
     // Get the presigned URL
-    const response = await axios({
-      method: "GET",
-      url,
-      params: {
-        name: encodeURIComponent(file?.name),
-      },
-    });
-    console.log("File to upload: ", file?.name);
-    console.log("Uploading to: ", response.data);
-    const result = await fetch(response.data, {
-      method: "PUT",
-      body: file,
-    });
-    console.log("Result: ", result);
-    setFile("");
+    let authorizationToken = localStorage.getItem("authorization_token");
+    if (!authorizationToken) {
+      authorizationToken = btoa("dheeraj_anumula:TEST_PASSWORD");
+      localStorage.setItem("authorization_token", authorizationToken);
+    }
+    try {
+      const response = await axios({
+        method: "GET",
+        url,
+        params: {
+          name: encodeURIComponent(file?.name),
+        },
+        headers: {
+          Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
+        },
+      });
+      console.log("File to upload: ", file?.name);
+      console.log("Uploading to: ", response.data);
+      const result = await fetch(response.data, {
+        method: "PUT",
+        body: file,
+      });
+      console.log("Result: ", result);
+      setFile("");
+    } catch (error: AxiosError | any) {
+      if (error?.response?.status === 401) {
+        alert("Unauthorized!");
+      }
+
+      if (error?.response?.status === 403) {
+        alert(`${error?.response?.data?.message} - status code: 403`);
+      }
+    }
   };
   return (
     <Box>
